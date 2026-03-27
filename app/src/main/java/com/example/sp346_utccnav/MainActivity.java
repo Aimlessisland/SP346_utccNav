@@ -3,8 +3,11 @@ package com.example.sp346_utccnav;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView currentLocationValue;
     double latitude, longitude;
-
     FusedLocationProviderClient fusedLocationClient;
 
     @Override
@@ -31,25 +33,91 @@ public class MainActivity extends AppCompatActivity {
         hideSystemUI();
 
         currentLocationValue = findViewById(R.id.currentLocationValue);
-        currentLocationValue.setText("กำลังระบุตำแหน่ง...");
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         getLocation();
 
+        // Restore image resolution reduction logic
+        loadSampledImages();
+
         // Navigation buttons
         findViewById(R.id.homeBtn).setOnClickListener(v -> {
             getLocation();
-            Toast.makeText(this, "lat:" + latitude + " lon:" + longitude, Toast.LENGTH_SHORT).show();
+            calculateNear cn = new calculateNear(latitude, longitude);
+            Toast.makeText(this, cn.getBuildingName(), Toast.LENGTH_SHORT).show();
         });
         findViewById(R.id.aboutBtn).setOnClickListener(v -> startActivity(new Intent(this, AboutActivity.class)));
         findViewById(R.id.historyBtn).setOnClickListener(v -> startActivity(new Intent(this, HistoryActivity.class)));
         findViewById(R.id.gmapBtn).setOnClickListener(v -> startActivity(new Intent(this, MapActivity.class)));
         findViewById(R.id.settingBtn).setOnClickListener(v -> startActivity(new Intent(this, SettingActivity.class)));
 
-        // Box Click Listeners
-        View.OnClickListener boxClickListener = v -> startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
-        int[] boxIds = {R.id.box1, R.id.box2, R.id.box3, R.id.box4, R.id.box5, R.id.box6, R.id.box7, R.id.box8, R.id.box9, R.id.box10};
-        for (int id : boxIds) findViewById(id).setOnClickListener(boxClickListener);
+        // Individual click listeners for each box
+        //Each box gonna tell the navigateView to start the closest panoview to play first
+        findViewById(R.id.box1).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+        });
+        findViewById(R.id.box2).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+        });
+        findViewById(R.id.box3).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+        });
+        findViewById(R.id.box4).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+        });
+        findViewById(R.id.box5).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+        });
+        findViewById(R.id.box6).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+        });
+        findViewById(R.id.box7).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+        });
+        findViewById(R.id.box8).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+        });
+        findViewById(R.id.box9).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+        });
+        findViewById(R.id.box10).setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+        });
+    }
+
+    private void loadSampledImages() {
+        int[] boxIds = {R.id.box1, R.id.box2, R.id.box3, R.id.box4, R.id.box5, R.id.box6, R.id.box7, R.id.box8};
+        int[] resIds = {R.drawable.b24, R.drawable.b07, R.drawable.b01, R.drawable.b05, R.drawable.b10, R.drawable.b15, R.drawable.b21, R.drawable.b23};
+
+        for (int i = 0; i < resIds.length; i++) {
+            ImageView img = findViewById(boxIds[i]);
+            if (img != null) {
+                img.setImageBitmap(decodeSampledBitmapFromResource(resIds[i], 50, 50));
+            }
+        }
+    }
+
+    private Bitmap decodeSampledBitmapFromResource(int resId, int reqWidth, int reqHeight) {
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(getResources(), resId, options);
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(getResources(), resId, options);
+    }
+
+    private int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+        if (height > reqHeight || width > reqWidth) {
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+            while ((halfHeight / inSampleSize) >= reqHeight && (halfWidth / inSampleSize) >= reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+        return inSampleSize;
     }
 
     private void hideSystemUI() {
@@ -66,11 +134,12 @@ public class MainActivity extends AppCompatActivity {
         }
         fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
             if (location != null) {
-                this.latitude = location.getLatitude();
-                this.longitude = location.getLongitude();
-                if (currentLocationValue != null) {
-                    currentLocationValue.setText("lat:" + latitude + "\n lon:" + longitude);
-                }
+                // Keep your manual test coords for now as you had them
+                this.latitude = 13.78011055424268;
+                this.longitude = 100.5601834393343;
+                //13.780258496412232, 100.56015174593394
+                calculateNear cn = new calculateNear(latitude, longitude);
+                currentLocationValue.setText(cn.getBuildingName());
             }
         });
     }
