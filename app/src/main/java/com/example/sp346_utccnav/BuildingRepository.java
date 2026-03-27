@@ -36,6 +36,24 @@ public class BuildingRepository {
         panolocate.add(new Building("pos11", 13.779250827064768, 100.56048743693606, "", R.drawable.pos11));
         panolocate.add(new Building("pos12", 13.778949947450268, 100.56042641668063, "", R.drawable.pos12));
         panolocate.add(new Building("pos13", 13.778989022746252, 100.5602487203423, "", R.drawable.pos13));
+        panolocate.add(new Building("pos14", 13.00, 11.00, "", R.drawable.pos14));
+        panolocate.add(new Building("pos15", 10.00, 10.00, "", R.drawable.pos15));
+        panolocate.add(new Building("pos16", 10.00, 10.00, "", R.drawable.pos16));
+        panolocate.add(new Building("pos17", 10.00, 10.00, "", R.drawable.pos17));
+        panolocate.add(new Building("pos18", 10.00, 10.00, "", R.drawable.pos18));
+        panolocate.add(new Building("pos19", 10.00, 10.00, "", R.drawable.pos19));
+        panolocate.add(new Building("pos20", 10.00, 10.00, "", R.drawable.pos20));
+        panolocate.add(new Building("pos21", 10.00, 10.00, "", R.drawable.pos21));
+        panolocate.add(new Building("pos22", 10.00, 10.00, "", R.drawable.pos22));
+        panolocate.add(new Building("pos23", 10.00, 10.00, "", R.drawable.pos23));
+        panolocate.add(new Building("pos24", 10.00, 10.00, "", R.drawable.pos24));
+        panolocate.add(new Building("pos25", 10.00, 10.00, "", R.drawable.pos25));
+        panolocate.add(new Building("pos26", 10.00, 10.00, "", R.drawable.pos26));
+        panolocate.add(new Building("pos27", 10.00, 10.00, "", R.drawable.pos27));
+        panolocate.add(new Building("pos28", 10.00, 10.00, "", R.drawable.pos28));
+        panolocate.add(new Building("pos29", 10.00, 10.00, "", R.drawable.pos29));
+        panolocate.add(new Building("pos30", 10.00, 10.00, "", R.drawable.pos30));
+        panolocate.add(new Building("pos31", 10.00, 10.00, "", R.drawable.pos31));
     }
 
     public static List<Building> getBuildings() { return buildings; }
