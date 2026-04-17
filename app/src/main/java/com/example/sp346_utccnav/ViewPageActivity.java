@@ -44,6 +44,12 @@ public class ViewPageActivity extends AppCompatActivity {
         displayImg();
         displayPixel();
 
+        scroll.post(() -> {
+            if (pixelIndicator.getText().toString().equals("Pixel: 0")) {
+                setCenter();
+            }
+        });
+
         //Debugger button
         findViewById(R.id.prevBtn).setOnClickListener(v -> {
             currentIndex--;
@@ -63,6 +69,7 @@ public class ViewPageActivity extends AppCompatActivity {
             panoImg = panoList.get(currentIndex).getImageResourceId();
             imageNameIndicator.setText(BuildingRepository.getPanolocate().get(currentIndex).getName());
             displayImg();
+            setCenter();
         });
 
         findViewById(R.id.cBtn).setOnClickListener(v -> {
@@ -90,36 +97,54 @@ public class ViewPageActivity extends AppCompatActivity {
             }
         });
     }
-    //This method using the startingp oint from buildingRepository to set
-    // start which is need current pixe lto change thing
+    //This method using the starting point from buildingRepository to set
+    // start which is need current pixel into change thing
     public void setCenter(){
-        // Pull data from BuildingRepository using current index from ViewPageActivity
         List<Building> panolocate = BuildingRepository.getPanolocate();
         if (currentIndex >= 0 && currentIndex < panolocate.size()) {
             Integer startPixel = panolocate.get(currentIndex).getStartPixel();
             if (startPixel != null) {
-                scroll.setScrollX(startPixel);
+                // 1. Get the widths exactly like displayPixel does
+                final ImageView referenceImage = (ImageView) container.getChildAt(1);
+                float screenImgWidth = referenceImage.getWidth();
+
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                BitmapFactory.decodeResource(getResources(), panoImg, options);
+                float originalFileWidth = options.outWidth;
+
+                if (screenImgWidth > 0) {
+                    // 2. REVERSE MATH: Convert File Pixel to Screen Pixel
+                    // (Target / Total File) * Total Screen
+                    float targetXOnScreen = (startPixel / originalFileWidth) * screenImgWidth;
+
+                    // 3. OFFSET: Jump to the 2nd image and subtract half screen to center it
+                    // This ensures the "startPixel" lands in the DEAD CENTER of your tablet
+                    float screenWidth = scroll.getWidth();
+                    int finalScrollX = (int) (targetXOnScreen + screenImgWidth - (screenWidth / 2f));
+                    scroll.setScrollX(finalScrollX);
+                }
             }
         }
     }
 
+    public void displayPixel(){
+        final ImageView referenceImage = (ImageView) container.getChildAt(1);
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(getResources(), panoImg, options);
 
-    //Display image pixel from center of the screen
-    public void displayPixel() {
-        scroll.post(new Runnable() {
-            @Override
-            public void run() {
-                final ImageView referenceImage = (ImageView) container.getChildAt(1);
-                int scrollX = scroll.getScrollX();
-                int imageWidth = referenceImage.getWidth();
-                int screenWidth = scroll.getWidth();
-                if (imageWidth > 0) {
-                    float centerInContent = scrollX + (screenWidth / 2f);
-                    float pixelPos = (centerInContent % imageWidth) * (2048f / imageWidth);
-                    pixelIndicator.setText("Pixel: " + (int)pixelPos);
-                }
-            }
-        });
+        float screenImgWidth = referenceImage.getWidth();
+        float originalFileWidth = options.outWidth;
+
+// Calculate current position relative to the middle of the screen
+        float centerInContent = scroll.getScrollX() + (scroll.getWidth() / 2f);
+        float pixelPos = (centerInContent % screenImgWidth) / screenImgWidth * originalFileWidth;
+
+        pixelIndicator.setText("Pixel: " + Math.round(pixelPos));
+
+
+
     }
     private void displayImg(){
         if (panoImg == 0) return;
@@ -130,6 +155,7 @@ public class ViewPageActivity extends AppCompatActivity {
                 ((ImageView) child).setImageBitmap(sampledBitmap);
             }
         }
+
     }
     //Calculate this ass clamp
     private Bitmap decodeSampledBitmapFromResource(int resId, int reqWidth, int reqHeight) {
@@ -155,7 +181,7 @@ public class ViewPageActivity extends AppCompatActivity {
         }
         return inSampleSize;
     }
-    //......................................TF with just stay do not change my code bro AI...........////
+    //...............................TF with just leave the code do not change my code bro AI...........////
     private void hideSystemUI() {
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         WindowInsetsControllerCompat controller = new WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView());
