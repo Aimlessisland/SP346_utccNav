@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
         RequestBody body = RequestBody.create(json, MediaType.parse("application/json; charset=utf-8"));
         Request request = new Request.Builder()
-                .url("http://192.168.1.105:8080/api/nav/send-location")
+                .url("http://192.168.1.105:8080/api/nav/history")
                 .post(body)
                 .build();
 
