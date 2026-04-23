@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,12 +18,26 @@ import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
     public TextView currentLocationValue;
     double latitude, longitude;
     FusedLocationProviderClient fusedLocationClient;
+    private final OkHttpClient client = new OkHttpClient();
+    private final Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,74 +50,69 @@ public class MainActivity extends AppCompatActivity {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         getLocation();
 
-        // Restore image resolution reduction logic
         loadSampledImages();
 
         // Navigation buttons
-        findViewById(R.id.homeBtn).setOnClickListener(v -> {
-            getLocation();
-        });
+        findViewById(R.id.homeBtn).setOnClickListener(v -> getLocation());
         findViewById(R.id.aboutBtn).setOnClickListener(v -> startActivity(new Intent(this, AboutActivity.class)));
         findViewById(R.id.historyBtn).setOnClickListener(v -> startActivity(new Intent(this, HistoryActivity.class)));
         findViewById(R.id.gmapBtn).setOnClickListener(v -> startActivity(new Intent(this, MapActivity.class)));
         findViewById(R.id.settingBtn).setOnClickListener(v -> startActivity(new Intent(this, SettingActivity.class)));
 
-        // Individual click listeners for each box
-        //Each box gonna tell the navigateView to start the closest panoview to play first
-        findViewById(R.id.box1).setOnClickListener(v -> {
-            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
-            Intent intent = new Intent(MainActivity.this, ViewPageActivity.class);
-            intent.putExtra("clickedBoxName", "ตึก 24");
-            startActivity(intent);
-        });
-        findViewById(R.id.box2).setOnClickListener(v -> {
-            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
-            Intent intent = new Intent(MainActivity.this, ViewPageActivity.class);
-            intent.putExtra("clickedBoxName", "ตึก 7");
-            startActivity(intent);
+        // Box click listeners
+        setupBoxClickListener(R.id.box1, "ตึก 24");
+        setupBoxClickListener(R.id.box2, "ตึก 7");
+        setupBoxClickListener(R.id.box3, "ตึก 1");
+        setupBoxClickListener(R.id.box4, "ตึก 5");
+        setupBoxClickListener(R.id.box5, "ตึก 10");
+        setupBoxClickListener(R.id.box6, "ตึก 15");
+        setupBoxClickListener(R.id.box7, "ตึก 21");
+        setupBoxClickListener(R.id.box8, "ตึก 23");
+    }
 
-        });
-        findViewById(R.id.box3).setOnClickListener(v -> {
-            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+    private void setupBoxClickListener(int viewId, String buildingName) {
+        findViewById(viewId).setOnClickListener(v -> {
+            saveHistory(buildingName);
             Intent intent = new Intent(MainActivity.this, ViewPageActivity.class);
-            intent.putExtra("clickedBoxName", "ตึก 1");
+            intent.putExtra("clickedBoxName", buildingName);
             startActivity(intent);
         });
-        findViewById(R.id.box4).setOnClickListener(v -> {
-            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
-            Intent intent = new Intent(MainActivity.this, ViewPageActivity.class);
-            intent.putExtra("clickedBoxName", "ตึก 5");
-            startActivity(intent);
-        });
-        findViewById(R.id.box5).setOnClickListener(v -> {
-            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
-            Intent intent = new Intent(MainActivity.this, ViewPageActivity.class);
-            intent.putExtra("clickedBoxName", "ตึก 10");
-            startActivity(intent);
-        });
-        findViewById(R.id.box6).setOnClickListener(v -> {
-            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
-            Intent intent = new Intent(MainActivity.this, ViewPageActivity.class);
-            intent.putExtra("clickedBoxName", "ตึก 15");
-            startActivity(intent);
-        });
-        findViewById(R.id.box7).setOnClickListener(v -> {
-            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
-            Intent intent = new Intent(MainActivity.this, ViewPageActivity.class);
-            intent.putExtra("clickedBoxName", "ตึก 21");
-            startActivity(intent);
-        });
-        findViewById(R.id.box8).setOnClickListener(v -> {
-            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
-            Intent intent = new Intent(MainActivity.this, ViewPageActivity.class);
-            intent.putExtra("clickedBoxName", "ตึก 23");
-            startActivity(intent);
-        });
-        findViewById(R.id.box9).setOnClickListener(v -> {
-            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
-        });
-        findViewById(R.id.box10).setOnClickListener(v -> {
-            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+    }
+
+    private void saveHistory(String buildingName) {
+        String startPoint = currentLocationValue.getText().toString();
+        
+        // Find the building details from BuildingRepository
+        double targetLat = 0.0;
+        double targetLong = 0.0;
+        List<Building> buildings = BuildingRepository.getBuildings();
+        for (Building b : buildings) {
+            if (b.getName().equals(buildingName)) {
+                targetLat = b.getLatitude();
+                targetLong = b.getLongitude();
+                break;
+            }
+        }
+
+        HistoryEntry entry = new HistoryEntry(buildingName, startPoint, targetLat, targetLong);
+        String json = gson.toJson(entry);
+
+        RequestBody body = RequestBody.create(json, MediaType.parse("application/json; charset=utf-8"));
+        Request request = new Request.Builder()
+                .url("http://192.168.1.105:8080/api/nav/send-location")
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                // Silently fail or log
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                response.close();
+            }
         });
     }
 
@@ -150,19 +158,15 @@ public class MainActivity extends AppCompatActivity {
         controller.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
     }
 
-    public  void getLocation() {
+    public void getLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
         }
         fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
             if (location != null) {
-//                this.latitude = location.getLatitude();
-//                this.longitude = location.getLongitude();
                 this.latitude = 13.780329795615001;
                 this.longitude = 100.5604076955666;
-                //13.780329795615001, 100.5604076955666 Building 24
-
                 calculateNear cn = new calculateNear(this.latitude, this.longitude);
                 currentLocationValue.setText(cn.getBuildingName());
             } else {
@@ -170,8 +174,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
