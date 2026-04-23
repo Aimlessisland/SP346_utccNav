@@ -23,4 +23,5 @@ public class Building {
     public String getDescription() { return description; }
     public Integer getImageResourceId() { return imageResourceId; }
     public Integer getStartPixel() { return startPixel; }
+
 }

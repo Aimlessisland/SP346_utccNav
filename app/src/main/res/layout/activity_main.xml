@@ -99,10 +99,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/box1_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:background="#80FFFFFF"
+                android:paddingVertical="4dp"
+                android:text="อาคาร 24"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/box1"
+                app:layout_constraintEnd_toEndOf="@+id/box1"
+                app:layout_constraintStart_toStartOf="@+id/box1" />
+
             <!-- Box 2 -->
             <ImageView
                 android:id="@+id/box2"
-                android:src="@drawable/b07"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_margin="8dp"
@@ -111,16 +125,31 @@
                 android:focusable="true"
                 android:padding="8dp"
                 android:scaleType="fitCenter"
+                android:src="@drawable/b07"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/box1"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/box2_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:background="#80FFFFFF"
+                android:paddingVertical="4dp"
+                android:text="อาคาร 7"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/box2"
+                app:layout_constraintEnd_toEndOf="@+id/box2"
+                app:layout_constraintStart_toStartOf="@+id/box2" />
+
             <!-- Box 3 -->
             <ImageView
                 android:id="@+id/box3"
-                android:src="@drawable/b01"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_margin="8dp"
@@ -129,17 +158,31 @@
                 android:focusable="true"
                 android:padding="8dp"
                 android:scaleType="fitCenter"
+                android:src="@drawable/b01"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/box4"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/box1" />
 
+            <TextView
+                android:id="@+id/box3_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:background="#80FFFFFF"
+                android:paddingVertical="4dp"
+                android:text="อาคาร 1"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/box3"
+                app:layout_constraintEnd_toEndOf="@+id/box3"
+                app:layout_constraintStart_toStartOf="@+id/box3" />
+
             <!-- Box 4 -->
             <ImageView
                 android:id="@+id/box4"
-                android:src="@drawable/b05"
-                android:rotation="180"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_margin="8dp"
@@ -147,17 +190,33 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="8dp"
+                android:rotation="180"
                 android:scaleType="fitCenter"
+                android:src="@drawable/b05"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/box3"
                 app:layout_constraintTop_toBottomOf="@+id/box2" />
 
+            <TextView
+                android:id="@+id/box4_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:background="#80FFFFFF"
+                android:paddingVertical="4dp"
+                android:text="อาคาร 5"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/box4"
+                app:layout_constraintEnd_toEndOf="@+id/box4"
+                app:layout_constraintStart_toStartOf="@+id/box4" />
+
             <!-- Box 5 -->
             <ImageView
                 android:id="@+id/box5"
-                android:src="@drawable/b10"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_margin="8dp"
@@ -166,17 +225,31 @@
                 android:focusable="true"
                 android:padding="8dp"
                 android:scaleType="fitCenter"
+                android:src="@drawable/b10"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/box6"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/box3" />
 
+            <TextView
+                android:id="@+id/box5_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:background="#80FFFFFF"
+                android:paddingVertical="4dp"
+                android:text="อาคาร 10"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/box5"
+                app:layout_constraintEnd_toEndOf="@+id/box5"
+                app:layout_constraintStart_toStartOf="@+id/box5" />
+
             <!-- Box 6 -->
             <ImageView
                 android:id="@+id/box6"
-                android:src="@drawable/b15"
-                android:rotation="180"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_margin="8dp"
@@ -184,18 +257,33 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="8dp"
+                android:rotation="180"
                 android:scaleType="fitCenter"
+                android:src="@drawable/b15"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/box5"
                 app:layout_constraintTop_toBottomOf="@+id/box4" />
 
+            <TextView
+                android:id="@+id/box6_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:background="#80FFFFFF"
+                android:paddingVertical="4dp"
+                android:text="อาคาร 15"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/box6"
+                app:layout_constraintEnd_toEndOf="@+id/box6"
+                app:layout_constraintStart_toStartOf="@+id/box6" />
+
             <!-- Box 7 -->
             <ImageView
                 android:id="@+id/box7"
-                android:src="@drawable/b21"
-                android:rotation="180"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_margin="8dp"
@@ -203,18 +291,33 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="8dp"
+                android:rotation="180"
                 android:scaleType="fitCenter"
+                android:src="@drawable/b21"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@+id/box8"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/box5" />
 
+            <TextView
+                android:id="@+id/box7_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:background="#80FFFFFF"
+                android:paddingVertical="4dp"
+                android:text="อาคาร 21"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/box7"
+                app:layout_constraintEnd_toEndOf="@+id/box7"
+                app:layout_constraintStart_toStartOf="@+id/box7" />
+
             <!-- Box 8 -->
             <ImageView
                 android:id="@+id/box8"
-                android:src="@drawable/b23"
-                android:rotation="180"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_margin="8dp"
@@ -222,12 +325,29 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="8dp"
+                android:rotation="180"
                 android:scaleType="fitCenter"
+                android:src="@drawable/b23"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/box7"
                 app:layout_constraintTop_toBottomOf="@+id/box6" />
+
+            <TextView
+                android:id="@+id/box8_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:background="#80FFFFFF"
+                android:paddingVertical="4dp"
+                android:text="อาคาร 23"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/box8"
+                app:layout_constraintEnd_toEndOf="@+id/box8"
+                app:layout_constraintStart_toStartOf="@+id/box8" />
 
             <!-- Box 9 -->
             <ImageView
@@ -246,6 +366,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/box7" />
 
+            <TextView
+                android:id="@+id/box9_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:background="#80FFFFFF"
+                android:paddingVertical="4dp"
+                android:text="Pano 4"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/box9"
+                app:layout_constraintEnd_toEndOf="@+id/box9"
+                app:layout_constraintStart_toStartOf="@+id/box9" />
+
             <!-- Box 10 -->
             <ImageView
                 android:id="@+id/box10"
@@ -262,6 +397,21 @@
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/box9"
                 app:layout_constraintTop_toBottomOf="@+id/box8" />
+
+            <TextView
+                android:id="@+id/box10_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:background="#80FFFFFF"
+                android:paddingVertical="4dp"
+                android:text="Pano 1"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/box10"
+                app:layout_constraintEnd_toEndOf="@+id/box10"
+                app:layout_constraintStart_toStartOf="@+id/box10" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
@@ -300,11 +450,11 @@
         android:padding="8dp"
         android:scaleType="fitCenter"
         android:src="@drawable/about"
-        app:tint="@android:color/darker_gray"
         app:layout_constraintEnd_toStartOf="@+id/historyBtn"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="@+id/nav_bar_background"
-        app:layout_constraintTop_toTopOf="@+id/nav_bar_background" />
+        app:layout_constraintTop_toTopOf="@+id/nav_bar_background"
+        app:tint="@android:color/darker_gray" />
 
     <ImageButton
         android:id="@+id/historyBtn"
@@ -314,12 +464,12 @@
         android:padding="8dp"
         android:scaleType="fitCenter"
         android:src="@drawable/history"
-        app:tint="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="@+id/nav_bar_background"
         app:layout_constraintEnd_toStartOf="@+id/homeBtn"
         app:layout_constraintStart_toEndOf="@+id/aboutBtn"
         app:layout_constraintTop_toTopOf="@+id/nav_bar_background"
-        app:layout_constraintVertical_bias="0.428" />
+        app:layout_constraintVertical_bias="0.428"
+        app:tint="@android:color/darker_gray" />
 
     <ImageButton
         android:id="@+id/gmapBtn"
@@ -330,10 +480,10 @@
         android:padding="8dp"
         android:scaleType="fitCenter"
         android:src="@drawable/gmap"
-        app:tint="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/nav_bar_background"
         app:layout_constraintStart_toEndOf="@+id/homeBtn"
         app:layout_constraintTop_toTopOf="@+id/nav_bar_background"
-        app:layout_constraintBottom_toBottomOf="@+id/nav_bar_background"/>
+        app:tint="@android:color/darker_gray" />
 
     <ImageButton
         android:id="@+id/settingBtn"
@@ -344,10 +494,10 @@
         android:padding="8dp"
         android:scaleType="fitCenter"
         android:src="@drawable/setting"
-        app:tint="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="@+id/nav_bar_background"
+        app:layout_constraintEnd_toEndOf="@+id/nav_bar_background"
         app:layout_constraintStart_toEndOf="@+id/gmapBtn"
         app:layout_constraintTop_toTopOf="@+id/nav_bar_background"
-        app:layout_constraintBottom_toBottomOf="@+id/nav_bar_background"
-        app:layout_constraintEnd_toEndOf="@+id/nav_bar_background"/>
+        app:tint="@android:color/darker_gray" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -162,4 +162,17 @@
         app:layout_constraintTop_toTopOf="@+id/nav_bar_background"
         app:tint="@android:color/black" />
 
+    <ImageView
+        android:id="@+id/forwardArrow"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="16dp"
+        android:alpha="0.5"
+        android:rotation="270"
+        android:src="@android:drawable/ic_media_play"
+        app:tint="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/nav_bar_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

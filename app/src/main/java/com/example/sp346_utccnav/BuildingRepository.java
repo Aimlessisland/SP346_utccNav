@@ -40,8 +40,8 @@ public class BuildingRepository {
         panolocate.add(new Building("pos15", 13.78047885831314, 100.56027865724917, "", R.drawable.pos15, 1428));
         panolocate.add(new Building("pos16", 13.780624996915892, 100.56029927916715, "", R.drawable.pos16, 1452));
         panolocate.add(new Building("pos17", 13.780771814363218, 100.56030714344517, "", R.drawable.pos17, 1640));
-        panolocate.add(new Building("pos18", 13.780755689908204, 100.56060598601032, "", R.drawable.pos18, 16402));
-        panolocate.add(new Building("pos19", 13.780746903652219, 100.56079337874051, "", R.drawable.pos19, 1400));
+        panolocate.add(new Building("pos18", 13.780755689908204, 100.56060598601032, "", R.drawable.pos18, 1488));
+        panolocate.add(new Building("pos19", 13.780746903652219, 100.56079337874051, "", R.drawable.pos19, 16680));
         panolocate.add(new Building("pos20", 13.780564294107608, 100.56082192972997, "", R.drawable.pos20, 1371));
         panolocate.add(new Building("pos21", 13.78044488948589, 100.56076285298485, "", R.drawable.pos21, 1371));
         panolocate.add(new Building("pos22", 13.78044183096904, 100.56081040725486, "", R.drawable.pos22, 1388));

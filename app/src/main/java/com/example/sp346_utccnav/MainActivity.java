@@ -22,7 +22,7 @@ import com.google.android.gms.location.LocationServices;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView currentLocationValue;
+    public TextView currentLocationValue;
     double latitude, longitude;
     FusedLocationProviderClient fusedLocationClient;
 
@@ -52,34 +52,59 @@ public class MainActivity extends AppCompatActivity {
         // Individual click listeners for each box
         //Each box gonna tell the navigateView to start the closest panoview to play first
         findViewById(R.id.box1).setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            Intent intent = new Intent(MainActivity.this, ViewPageActivity.class);
+            intent.putExtra("clickedBoxName", "ตึก 24");
+            startActivity(intent);
         });
         findViewById(R.id.box2).setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            Intent intent = new Intent(MainActivity.this, ViewPageActivity.class);
+            intent.putExtra("clickedBoxName", "ตึก 7");
+            startActivity(intent);
+
         });
         findViewById(R.id.box3).setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            Intent intent = new Intent(MainActivity.this, ViewPageActivity.class);
+            intent.putExtra("clickedBoxName", "ตึก 1");
+            startActivity(intent);
         });
         findViewById(R.id.box4).setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            Intent intent = new Intent(MainActivity.this, ViewPageActivity.class);
+            intent.putExtra("clickedBoxName", "ตึก 5");
+            startActivity(intent);
         });
         findViewById(R.id.box5).setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            Intent intent = new Intent(MainActivity.this, ViewPageActivity.class);
+            intent.putExtra("clickedBoxName", "ตึก 10");
+            startActivity(intent);
         });
         findViewById(R.id.box6).setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            Intent intent = new Intent(MainActivity.this, ViewPageActivity.class);
+            intent.putExtra("clickedBoxName", "ตึก 15");
+            startActivity(intent);
         });
         findViewById(R.id.box7).setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            Intent intent = new Intent(MainActivity.this, ViewPageActivity.class);
+            intent.putExtra("clickedBoxName", "ตึก 21");
+            startActivity(intent);
         });
         findViewById(R.id.box8).setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            Intent intent = new Intent(MainActivity.this, ViewPageActivity.class);
+            intent.putExtra("clickedBoxName", "ตึก 23");
+            startActivity(intent);
         });
         findViewById(R.id.box9).setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
         });
         findViewById(R.id.box10).setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
+            //startActivity(new Intent(MainActivity.this, ViewPageActivity.class));
         });
     }
 
@@ -125,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         controller.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
     }
 
-    private void getLocation() {
+    public  void getLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
@@ -136,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
 //                this.longitude = location.getLongitude();
                 this.latitude = 13.780329795615001;
                 this.longitude = 100.5604076955666;
-                //13.780329795615001, 100.5604076955666
+                //13.780329795615001, 100.5604076955666 Building 24
 
                 calculateNear cn = new calculateNear(this.latitude, this.longitude);
                 currentLocationValue.setText(cn.getBuildingName());
@@ -145,6 +170,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {

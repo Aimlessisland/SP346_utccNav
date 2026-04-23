@@ -35,6 +35,8 @@ public class calculateNear {
         return (closestBuilding != null) ? closestBuilding.getName() : "ไม่พบอาคารใกล้เคียง";
     }
 
+
+
     // Haversine formula for distance calculation in meters
     private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
         double theta = lon1 - lon2;

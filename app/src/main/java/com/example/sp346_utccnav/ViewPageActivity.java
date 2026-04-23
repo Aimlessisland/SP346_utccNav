@@ -1,6 +1,8 @@
 package com.example.sp346_utccnav;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -12,9 +14,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.core.view.WindowInsetsControllerCompat;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewPageActivity extends AppCompatActivity {
@@ -26,6 +34,10 @@ public class ViewPageActivity extends AppCompatActivity {
     private HorizontalScrollView scroll;
     private TextView pixelIndicator;
     private TextView imageNameIndicator;
+    private int startIdx = 0;
+    private String currentLocationValue;
+    private FusedLocationProviderClient fusedLocationClient;
+    String[] pathingList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,26 +62,8 @@ public class ViewPageActivity extends AppCompatActivity {
             }
         });
 
-        //Debugger button
-        findViewById(R.id.prevBtn).setOnClickListener(v -> {
-            currentIndex--;
-            if (currentIndex < 0) {
-                currentIndex = panoList.size() - 1;
-            }
-            panoImg = panoList.get(currentIndex).getImageResourceId();
-            imageNameIndicator.setText(BuildingRepository.getPanolocate().get(currentIndex).getName());
-            displayImg();
-        });
-
-        findViewById(R.id.nextBtn).setOnClickListener(v -> {
-            currentIndex++;
-            if (currentIndex >= panoList.size()) {
-                currentIndex = 0;
-            }
-            panoImg = panoList.get(currentIndex).getImageResourceId();
-            imageNameIndicator.setText(BuildingRepository.getPanolocate().get(currentIndex).getName());
-            displayImg();
-        });
+        findViewById(R.id.prevBtn).setOnClickListener(v -> prevButton());
+        findViewById(R.id.nextBtn).setOnClickListener(v -> nextButton());
 
         findViewById(R.id.cBtn).setOnClickListener(v -> {
             setCenter();
@@ -95,10 +89,29 @@ public class ViewPageActivity extends AppCompatActivity {
                 displayPixel();
             }
         });
-
+        navigateSystem();
     }
-    //This method using the starting point from buildingRepository to set
-    // start which is need current pixel into change thing
+
+    private void prevButton() {
+        currentIndex--;
+        if (currentIndex < 0) {
+            currentIndex = panoList.size() - 1;
+        }
+        panoImg = panoList.get(currentIndex).getImageResourceId();
+        imageNameIndicator.setText(panoList.get(currentIndex).getName());
+        displayImg();
+    }
+
+    private void nextButton() {
+        currentIndex++;
+        if (currentIndex >= panoList.size()) {
+            currentIndex = 0;
+        }
+        panoImg = panoList.get(currentIndex).getImageResourceId();
+        imageNameIndicator.setText(panoList.get(currentIndex).getName());
+        displayImg();
+    }
+
     public void setCenter(){
         List<Building> panolocate = BuildingRepository.getPanolocate();
         if (currentIndex >= 0 && currentIndex < panolocate.size()) {
@@ -124,7 +137,94 @@ public class ViewPageActivity extends AppCompatActivity {
             }
         }
     }
+    public void navigateSystem() {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }
+        String targetBox = getIntent().getStringExtra("clickedBoxName");
+        List<Building> allBuildings = BuildingRepository.getBuildings();
+        Building destinationBuilding = null;
+        double disLat = 0;
+        double disLng = 0;
+        final double targetLat = disLat;
+        final double targetLng = disLng;
 
+        for (Building b : allBuildings) {
+            if (b.getName().equals(targetBox)) {
+                destinationBuilding = b;
+                disLat = b.getLatitude();
+                disLng = b.getLongitude();
+                break;
+            }
+        }
+
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+            if (location != null) {
+                double lat = 13.780329795615001;
+                double lng = 100.5604076955666;
+                calculateNear cn = new calculateNear(lat, lng);
+                this.currentLocationValue = cn.getBuildingName();
+                startIdx = 0;
+                float minStartDist = Float.MAX_VALUE;
+                for (int i = 0; i < panoList.size(); i++) {
+                    float[] results = new float[1];
+                    android.location.Location.distanceBetween(
+                            lat, lng,
+                            panoList.get(i).getLatitude(),
+                            panoList.get(i).getLongitude(),
+                            results);
+
+                    if (results[0] < minStartDist) {
+                        minStartDist = results[0];
+                        startIdx = i;
+                    }
+                }
+                while (currentIndex != startIdx) { nextButton(); }
+
+            }
+        });
+
+        findViewById(R.id.forwardArrow).setOnClickListener(v -> {
+            Toast.makeText(this, "forward", Toast.LENGTH_SHORT).show();
+
+            double curLat = panoList.get(currentIndex).getLatitude();
+            double curLng = panoList.get(currentIndex).getLongitude();
+
+            float[] distNow = new float[1];
+            android.location.Location.distanceBetween(curLat, curLng, targetLat, targetLng, distNow);
+            float shortestDistance = distNow[0];
+            int bestNextIndex = currentIndex;
+
+            for (int i = 0; i < panoList.size(); i++) {
+                float[] distFromMe = new float[1];
+                android.location.Location.distanceBetween(
+                        curLat, curLng,
+                        panoList.get(i).getLatitude(), panoList.get(i).getLongitude(), distFromMe);
+
+                if (distFromMe[0] < 60 && distFromMe[0] > 1) {
+                    float[] distToTarget = new float[1];
+                    android.location.Location.distanceBetween(
+                            panoList.get(i).getLatitude(), panoList.get(i).getLongitude(),
+                            targetLat, targetLng, distToTarget);
+
+                    if (distToTarget[0] < shortestDistance) {
+                        shortestDistance = distToTarget[0];
+                        bestNextIndex = i;
+                    }
+                }
+            }
+
+            if (bestNextIndex > currentIndex) {
+                while (currentIndex != bestNextIndex) { nextButton(); }
+                setCenter();
+            } else if (bestNextIndex < currentIndex) {
+                while (currentIndex != bestNextIndex) { prevButton(); }
+                setCenter();
+            }
+        });
+    }
     public void displayPixel(){
         final ImageView referenceImage = (ImageView) container.getChildAt(1);
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -134,15 +234,12 @@ public class ViewPageActivity extends AppCompatActivity {
         float screenImgWidth = referenceImage.getWidth();
         float originalFileWidth = options.outWidth;
 
-// Calculate current position relative to the middle of the screen
         float centerInContent = scroll.getScrollX() + (scroll.getWidth() / 2f);
         float pixelPos = (centerInContent % screenImgWidth) / screenImgWidth * originalFileWidth;
 
         pixelIndicator.setText("Pixel: " + Math.round(pixelPos));
-
-
-
     }
+
     private void displayImg(){
         if (panoImg == 0) return;
         Bitmap sampledBitmap = decodeSampledBitmapFromResource(panoImg, 300, 300);
@@ -151,21 +248,19 @@ public class ViewPageActivity extends AppCompatActivity {
             if (child instanceof ImageView) {
                 ((ImageView) child).setImageBitmap(sampledBitmap);
             }
-            //displayPixel();
             setCenter();
         }
-
     }
-    //Calculate this ass clamp
+
     private Bitmap decodeSampledBitmapFromResource(int resId, int reqWidth, int reqHeight) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(getResources(), resId, options);
-
         options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeResource(getResources(), resId, options);
     }
+
     private int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         final int height = options.outHeight;
         final int width = options.outWidth;
@@ -180,7 +275,7 @@ public class ViewPageActivity extends AppCompatActivity {
         }
         return inSampleSize;
     }
-    //...............................TF with just leave the code do not change my code bro AI...........////
+
     private void hideSystemUI() {
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         WindowInsetsControllerCompat controller = new WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView());

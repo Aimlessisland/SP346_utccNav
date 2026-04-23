@@ -49,6 +49,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- box1 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,7 +65,7 @@
                     <ImageView
                         android:layout_width="120dp"
                         android:layout_height="120dp"
-                        android:background="@drawable/history_card_background"
+                        android:background="@drawable/b01"
                         android:padding="8dp"
                         android:scaleType="centerInside"
                         android:src="@android:drawable/ic_menu_gallery"
@@ -79,7 +80,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="สถานที่"
+                            android:text="อาคาร 1"
                             android:textColor="#224488"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -106,7 +107,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="--------------------------"
+                        android:text="คณะวิทยาศาสตร์และเทคโนโลยี"
                         android:textColor="#333333"
                         android:textSize="16sp" />
 
@@ -114,7 +115,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="-------------------------------"
+                        android:text="คณะวิทยพัฒน์"
                         android:textColor="#333333"
                         android:textSize="16sp" />
 
@@ -122,14 +123,581 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="----------------------------------------"
+                        android:text="สำนักทะเบียนและประมวลผล อาคาร 1 ชั้น 2"
                         android:textColor="#333333"
                         android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginBottom="32dp"><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical"><ImageView android:layout_width="120dp" android:layout_height="120dp" android:background="@drawable/history_card_background" android:padding="8dp" android:scaleType="centerInside" android:src="@android:drawable/ic_menu_gallery" app:tint="#CCCCCC" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginStart="24dp" android:orientation="vertical"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="สถานที่" android:textColor="#224488" android:textSize="28sp" android:textStyle="bold" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="-------" android:textColor="#224488" android:textSize="24sp" /></LinearLayout></LinearLayout><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:background="@drawable/history_card_background" android:orientation="vertical" android:padding="24dp" android:minHeight="200dp"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--------------------------" android:textColor="#333333" android:textSize="16sp" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="-------------------------------" android:textColor="#333333" android:textSize="16sp" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="----------------------------------------" android:textColor="#333333" android:textSize="16sp" /></LinearLayout></LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginBottom="32dp"><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical"><ImageView android:layout_width="120dp" android:layout_height="120dp" android:background="@drawable/history_card_background" android:padding="8dp" android:scaleType="centerInside" android:src="@android:drawable/ic_menu_gallery" app:tint="#CCCCCC" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginStart="24dp" android:orientation="vertical"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="สถานที่" android:textColor="#224488" android:textSize="28sp" android:textStyle="bold" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="-------" android:textColor="#224488" android:textSize="24sp" /></LinearLayout></LinearLayout><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:background="@drawable/history_card_background" android:orientation="vertical" android:padding="24dp" android:minHeight="200dp"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--------------------------" android:textColor="#333333" android:textSize="16sp" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="-------------------------------" android:textColor="#333333" android:textSize="16sp" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="----------------------------------------" android:textColor="#333333" android:textSize="16sp" /></LinearLayout></LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginBottom="32dp"><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical"><ImageView android:layout_width="120dp" android:layout_height="120dp" android:background="@drawable/history_card_background" android:padding="8dp" android:scaleType="centerInside" android:src="@android:drawable/ic_menu_gallery" app:tint="#CCCCCC" /><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginStart="24dp" android:orientation="vertical"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="สถานที่" android:textColor="#224488" android:textSize="28sp" android:textStyle="bold" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="-------" android:textColor="#224488" android:textSize="24sp" /></LinearLayout></LinearLayout><LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:background="@drawable/history_card_background" android:orientation="vertical" android:padding="24dp" android:minHeight="200dp"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--------------------------" android:textColor="#333333" android:textSize="16sp" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="-------------------------------" android:textColor="#333333" android:textSize="16sp" /><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="----------------------------------------" android:textColor="#333333" android:textSize="16sp" /></LinearLayout></LinearLayout>
+
+            <!-- box2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="32dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:rotation="180"
+                        android:background="@drawable/b05"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        app:tint="#CCCCCC" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="อาคาร 5"
+                            android:textColor="#224488"
+                            android:textSize="28sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="-------"
+                            android:textColor="#224488"
+                            android:textSize="24sp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/history_card_background"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:minHeight="200dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="บัณฑิตวิทยาลัย"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="คณะการศึกษาปฐมวัย"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text=""
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- box3 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="32dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:background="@drawable/b07"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        app:tint="#CCCCCC" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="อาคาร 7"
+                            android:textColor="#224488"
+                            android:textSize="28sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="-------"
+                            android:textColor="#224488"
+                            android:textSize="24sp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/history_card_background"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:minHeight="200dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="คณะนิติศาสตร์"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="คณะบริหารธุรกิจ"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="สำนักบริการคอมพิวเตอร์"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="กองแนะแนวและศิษย์เก่าสัมพันธ์ ชั้น 6"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- box4 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="32dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:background="@drawable/b10"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        app:tint="#CCCCCC" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="อาคาร 10"
+                            android:textColor="#224488"
+                            android:textSize="28sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="-------"
+                            android:textColor="#224488"
+                            android:textSize="24sp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/history_card_background"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:minHeight="200dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="คณะบริหารธุรกิจ"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="UTCC CO-WORKING SPACE"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="ศูนย์บริการวิชาการ อาคาร 10 ชั้น 5"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- box5 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="32dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:rotation="180"
+                        android:background="@drawable/b15"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        app:tint="#CCCCCC" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="อาคาร 15"
+                            android:textColor="#224488"
+                            android:textSize="28sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="-------"
+                            android:textColor="#224488"
+                            android:textSize="24sp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/history_card_background"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:minHeight="200dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="อาคารหอประชุม"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="ห้องเรียนคอมพิวเตอร์"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text=""
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- box6 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="32dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:rotation="180"
+                        android:background="@drawable/b21"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        app:tint="#CCCCCC" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="อาคาร 21"
+                            android:textColor="#224488"
+                            android:textSize="28sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="-------"
+                            android:textColor="#224488"
+                            android:textSize="24sp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/history_card_background"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:minHeight="200dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="คณะมนุษยศาสตร์"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="วิทยาลัยนานาชาติเพื่อการจัดการ (ISM)"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="บริหารธุรกิจบัณฑิต (IBM) (หลักสูตรนานาชาติ)"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- box7 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="32dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:rotation="180"
+                        android:background="@drawable/b23"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        app:tint="#CCCCCC" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="อาคาร 23"
+                            android:textColor="#224488"
+                            android:textSize="28sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="-------"
+                            android:textColor="#224488"
+                            android:textSize="24sp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/history_card_background"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:minHeight="200dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="คณะการท่องเที่ยวและอุตสาหกรรมบริการ"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="คณะพยาบาลศาสตร์ อาคาร 23 ชั้น 5"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="(UTCC Event Lab) อาคาร 23 ชั้น 7"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- box8 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="32dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:background="@drawable/b24"
+                        android:padding="8dp"
+                        android:scaleType="centerInside"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        app:tint="#CCCCCC" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="อาคาร 24"
+                            android:textColor="#224488"
+                            android:textSize="28sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="-------"
+                            android:textColor="#224488"
+                            android:textSize="24sp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/history_card_background"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:minHeight="200dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ห้องอเนกประสงค์ ชั้น 18"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="สำนักงานอธิการบดี ชั้น 17"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="สำนักผู้บริหาร ชั้น 16"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="ห้องประชุม ชั้น 15"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="คณะบัญชี ชั้น 14"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="คณะบริหารธุรกิจ ชั้น 12A"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="คณะวิทยาศาสตร์ฯ คณะเศรษฐศาสตร์ คณะบริหารธุรกิจ คณะศิลปะๆ (DAD) ชั้น 12"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="คณะวิทยาศาสตร์ฯ คณะการท่องเที่ยวฯ ชั้น 11"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="คณะมนุษศาสตร์ ชั้น 9-10"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="สำนักห้องสมุดกลาง ชั้น 5-7"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="วิทยาลัยการศึกษาต่อเนื่อง ชั้น 4"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="กองส่งเสริมการรับนักศึกษา ศูนย์รับสมัคร ชั้น 2-3"
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
