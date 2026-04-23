@@ -8,6 +8,7 @@ public class calculateNear {
     private double longitude;
 
     // Constructor to receive location from MainActivity
+    //13.77928170188982, 100.55997880652406
     public calculateNear(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;

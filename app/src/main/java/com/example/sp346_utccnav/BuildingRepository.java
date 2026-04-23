@@ -36,24 +36,24 @@ public class BuildingRepository {
         panolocate.add(new Building("pos11", 13.779250827064768, 100.56048743693606, "", R.drawable.pos11, 1488));
         panolocate.add(new Building("pos12", 13.778949947450268, 100.56042641668063, "", R.drawable.pos12, 1357));
         panolocate.add(new Building("pos13", 13.778989022746252, 100.5602487203423, "", R.drawable.pos13, 15679));
-        panolocate.add(new Building("pos14", 13.00, 11.00, "", R.drawable.pos14, 15954));
-        panolocate.add(new Building("pos15", 10.00, 10.00, "", R.drawable.pos15, 1428));
-        panolocate.add(new Building("pos16", 10.00, 10.00, "", R.drawable.pos16, 1452));
-        panolocate.add(new Building("pos17", 10.00, 10.00, "", R.drawable.pos17, 1640));
-        panolocate.add(new Building("pos18", 10.00, 10.00, "", R.drawable.pos18, 16402));
-        panolocate.add(new Building("pos19", 10.00, 10.00, "", R.drawable.pos19, 1400));
-        panolocate.add(new Building("pos20", 10.00, 10.00, "", R.drawable.pos20, 1371));
-        panolocate.add(new Building("pos21", 10.00, 10.00, "", R.drawable.pos21, 1371));
-        panolocate.add(new Building("pos22", 10.00, 10.00, "", R.drawable.pos22, 1388));
-        panolocate.add(new Building("pos23", 10.00, 10.00, "", R.drawable.pos23, 1423));
-        panolocate.add(new Building("pos24", 10.00, 10.00, "", R.drawable.pos24, 1417));
-        panolocate.add(new Building("pos25", 10.00, 10.00, "", R.drawable.pos25, 1381));
-        panolocate.add(new Building("pos26", 10.00, 10.00, "", R.drawable.pos26, 15596));
-        panolocate.add(new Building("pos27", 10.00, 10.00, "", R.drawable.pos27, 16045));
-        panolocate.add(new Building("pos28", 10.00, 10.00, "", R.drawable.pos28, 1257));
-        panolocate.add(new Building("pos29", 10.00, 10.00, "", R.drawable.pos29, 1185));
-        panolocate.add(new Building("pos30", 10.00, 10.00, "", R.drawable.pos30, 1390));
-        panolocate.add(new Building("pos31", 10.00, 10.00, "", R.drawable.pos31, 1390));
+        panolocate.add(new Building("pos14", 13.780201248851434, 100.56022133508323, "", R.drawable.pos14, 15954));
+        panolocate.add(new Building("pos15", 13.78047885831314, 100.56027865724917, "", R.drawable.pos15, 1428));
+        panolocate.add(new Building("pos16", 13.780624996915892, 100.56029927916715, "", R.drawable.pos16, 1452));
+        panolocate.add(new Building("pos17", 13.780771814363218, 100.56030714344517, "", R.drawable.pos17, 1640));
+        panolocate.add(new Building("pos18", 13.780755689908204, 100.56060598601032, "", R.drawable.pos18, 16402));
+        panolocate.add(new Building("pos19", 13.780746903652219, 100.56079337874051, "", R.drawable.pos19, 1400));
+        panolocate.add(new Building("pos20", 13.780564294107608, 100.56082192972997, "", R.drawable.pos20, 1371));
+        panolocate.add(new Building("pos21", 13.78044488948589, 100.56076285298485, "", R.drawable.pos21, 1371));
+        panolocate.add(new Building("pos22", 13.78044183096904, 100.56081040725486, "", R.drawable.pos22, 1388));
+        panolocate.add(new Building("pos23", 13.780286139156539, 100.56077715652502, "", R.drawable.pos23, 1423));
+        panolocate.add(new Building("pos24", 13.780101966906537, 100.56069486407233, "", R.drawable.pos24, 1417));
+        panolocate.add(new Building("pos25", 13.779642936719387, 100.5607069428955, "", R.drawable.pos25, 1381));
+        panolocate.add(new Building("pos26", 13.779343625476681, 100.56071172911335, "", R.drawable.pos26, 15596));
+        panolocate.add(new Building("pos27", 13.77920737751155, 100.56082134828925, "", R.drawable.pos27, 16045));
+        panolocate.add(new Building("pos28", 13.779146705802896, 100.561012654609, "", R.drawable.pos28, 1257));
+        panolocate.add(new Building("pos29", 13.779125386078636, 100.56125081860645, "", R.drawable.pos29, 1185));
+        panolocate.add(new Building("pos30", 13.778938488155815, 100.56001895355652, "", R.drawable.pos30, 1390));
+        panolocate.add(new Building("pos31", 13.77874745759615, 100.55986199908156, "", R.drawable.pos31, 1390));
     }
 
     public static List<Building> getBuildings() { return buildings; }

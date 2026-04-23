@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
         // Navigation buttons
         findViewById(R.id.homeBtn).setOnClickListener(v -> {
             getLocation();
-            calculateNear cn = new calculateNear(latitude, longitude);
-            Toast.makeText(this, cn.getBuildingName(), Toast.LENGTH_SHORT).show();
         });
         findViewById(R.id.aboutBtn).setOnClickListener(v -> startActivity(new Intent(this, AboutActivity.class)));
         findViewById(R.id.historyBtn).setOnClickListener(v -> startActivity(new Intent(this, HistoryActivity.class)));
@@ -134,12 +132,16 @@ public class MainActivity extends AppCompatActivity {
         }
         fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
             if (location != null) {
-                // Keep your manual test coords for now as you had them
-                this.latitude = 13.78011055424268;
-                this.longitude = 100.5601834393343;
-                //13.780258496412232, 100.56015174593394
-                calculateNear cn = new calculateNear(latitude, longitude);
+//                this.latitude = location.getLatitude();
+//                this.longitude = location.getLongitude();
+                this.latitude = 13.780329795615001;
+                this.longitude = 100.5604076955666;
+                //13.780329795615001, 100.5604076955666
+
+                calculateNear cn = new calculateNear(this.latitude, this.longitude);
                 currentLocationValue.setText(cn.getBuildingName());
+            } else {
+                currentLocationValue.setText("Location not found");
             }
         });
     }

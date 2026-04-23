@@ -69,7 +69,6 @@ public class ViewPageActivity extends AppCompatActivity {
             panoImg = panoList.get(currentIndex).getImageResourceId();
             imageNameIndicator.setText(BuildingRepository.getPanolocate().get(currentIndex).getName());
             displayImg();
-            setCenter();
         });
 
         findViewById(R.id.cBtn).setOnClickListener(v -> {
@@ -96,6 +95,7 @@ public class ViewPageActivity extends AppCompatActivity {
                 displayPixel();
             }
         });
+
     }
     //This method using the starting point from buildingRepository to set
     // start which is need current pixel into change thing
@@ -104,26 +104,23 @@ public class ViewPageActivity extends AppCompatActivity {
         if (currentIndex >= 0 && currentIndex < panolocate.size()) {
             Integer startPixel = panolocate.get(currentIndex).getStartPixel();
             if (startPixel != null) {
-                // 1. Get the widths exactly like displayPixel does
-                final ImageView referenceImage = (ImageView) container.getChildAt(1);
-                float screenImgWidth = referenceImage.getWidth();
+                // Add scroll.post to ensure the layout is ready before calculating
+                scroll.post(() -> {
+                    final ImageView referenceImage = (ImageView) container.getChildAt(1);
+                    float screenImgWidth = referenceImage.getWidth();
 
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inJustDecodeBounds = true;
-                BitmapFactory.decodeResource(getResources(), panoImg, options);
-                float originalFileWidth = options.outWidth;
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inJustDecodeBounds = true;
+                    BitmapFactory.decodeResource(getResources(), panoImg, options);
+                    float originalFileWidth = options.outWidth;
 
-                if (screenImgWidth > 0) {
-                    // 2. REVERSE MATH: Convert File Pixel to Screen Pixel
-                    // (Target / Total File) * Total Screen
-                    float targetXOnScreen = (startPixel / originalFileWidth) * screenImgWidth;
-
-                    // 3. OFFSET: Jump to the 2nd image and subtract half screen to center it
-                    // This ensures the "startPixel" lands in the DEAD CENTER of your tablet
-                    float screenWidth = scroll.getWidth();
-                    int finalScrollX = (int) (targetXOnScreen + screenImgWidth - (screenWidth / 2f));
-                    scroll.setScrollX(finalScrollX);
-                }
+                    if (screenImgWidth > 0) {
+                        float targetXOnScreen = (startPixel / originalFileWidth) * screenImgWidth;
+                        float screenWidth = scroll.getWidth();
+                        int finalScrollX = (int) (targetXOnScreen + screenImgWidth - (screenWidth / 2f));
+                        scroll.setScrollX(finalScrollX);
+                    }
+                });
             }
         }
     }
@@ -154,6 +151,8 @@ public class ViewPageActivity extends AppCompatActivity {
             if (child instanceof ImageView) {
                 ((ImageView) child).setImageBitmap(sampledBitmap);
             }
+            //displayPixel();
+            setCenter();
         }
 
     }
