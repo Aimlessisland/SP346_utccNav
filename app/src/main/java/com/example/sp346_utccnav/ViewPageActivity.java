@@ -36,6 +36,11 @@ public class ViewPageActivity extends AppCompatActivity {
     private TextView imageNameIndicator;
     private int startIdx = 0;
     private String currentLocationValue;
+    double latitude, longitude;
+    double npLat, npLng;
+    double targetLat = 0;
+    double targetLng = 0;
+
     private FusedLocationProviderClient fusedLocationClient;
     String[] pathingList;
 
@@ -89,6 +94,7 @@ public class ViewPageActivity extends AppCompatActivity {
                 displayPixel();
             }
         });
+        startImage();
         navigateSystem();
     }
 
@@ -138,28 +144,108 @@ public class ViewPageActivity extends AppCompatActivity {
         }
     }
     public void navigateSystem() {
+        // 1. INITIAL CHECK: Ensure we have coordinates
+        if (this.latitude == 0 || this.longitude == 0) {
+            getLocation();
+        }
+
+        findViewById(R.id.forwardArrow).setOnClickListener(v -> {
+            // Simple visual feedback
+            Toast.makeText(this, "forward", Toast.LENGTH_SHORT).show();
+
+            // --- STEP 3: SET TARGET ---
+            double targetLat = 13.779513125254471;
+            double targetLng = 100.56108830609556;
+
+            // --- STEP 4: GET CURRENT PANO COORDINATES ---
+            List<Building> panoList = BuildingRepository.getPanolocate();
+
+            double currentPanolat = panoList.get(currentIndex).getLatitude();
+            double currentPanolng = panoList.get(currentIndex).getLongitude();
+
+            // Logic Variables
+            int bestIndex = -1;
+            float minTargetDist = Float.MAX_VALUE;
+
+            // --- STEP 5: ITERATE AND COMPARE ---
+            for (int i = 0; i < panoList.size(); i++) {
+                // Pass if index is equal to currentIndex
+                if (i == currentIndex) continue;
+
+                // Get coordinates for point 'i'
+                double panoLat = panoList.get(i).getLatitude();
+                double panoLng = panoList.get(i).getLongitude();
+
+                // A. Calculate distance from YOU to this point (The "Step" check)
+                float[] resultsToMe = new float[1];
+                android.location.Location.distanceBetween(
+                        currentPanolat, currentPanolng,
+                        panoLat, panoLng,
+                        resultsToMe);
+                float distToMe = resultsToMe[0];
+
+                // B. Calculate distance from THIS POINT to the Target
+                float[] resultsToTarget = new float[1];
+                android.location.Location.distanceBetween(
+                        panoLat, panoLng,
+                        targetLat, targetLng,
+                        resultsToTarget);
+                float distToTarget = resultsToTarget[0];
+
+                // --- THE SELECTION RULE ---
+                // Is it nearby (within 35m)?
+                if (distToMe < 35.0f) {
+                    // Out of all nearby points, pick the one that gets you closest to the target
+                    if (distToTarget < minTargetDist) {
+                        minTargetDist = distToTarget;
+                        bestIndex = i;
+                    }
+                }
+            }
+
+            // --- STEP 6: UPDATE AND DISPLAY ---
+            if (bestIndex != -1) {
+                // Update the master index
+                this.currentIndex = bestIndex;
+
+                // Sync activity variables with the new chosen point
+                this.latitude = panoList.get(currentIndex).getLatitude();
+                this.longitude = panoList.get(currentIndex).getLongitude();
+                this.panoImg = panoList.get(currentIndex).getImageResourceId();
+
+                // Update UI text indicator
+                if (imageNameIndicator != null) {
+                    imageNameIndicator.setText(panoList.get(currentIndex).getName());
+                }
+
+                // Refresh the view
+                displayImg();
+            } else {
+                Toast.makeText(this, "No path forward found", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void getLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+            if (location != null) {
+                this.latitude = location.getLatitude();
+                this.longitude = location.getLongitude();
+                calculateNear cn = new calculateNear(this.latitude, this.longitude);
+                this.currentLocationValue = cn.getBuildingName();
+            }
+        });
+    }
+
+    private void startImage() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return;
         }
-        String targetBox = getIntent().getStringExtra("clickedBoxName");
-        List<Building> allBuildings = BuildingRepository.getBuildings();
-        Building destinationBuilding = null;
-        double disLat = 0;
-        double disLng = 0;
-        final double targetLat = disLat;
-        final double targetLng = disLng;
-
-        for (Building b : allBuildings) {
-            if (b.getName().equals(targetBox)) {
-                destinationBuilding = b;
-                disLat = b.getLatitude();
-                disLng = b.getLongitude();
-                break;
-            }
-        }
-
         fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
             if (location != null) {
                 double lat = 13.780329795615001;
@@ -185,46 +271,95 @@ public class ViewPageActivity extends AppCompatActivity {
 
             }
         });
-
-        findViewById(R.id.forwardArrow).setOnClickListener(v -> {
-            Toast.makeText(this, "forward", Toast.LENGTH_SHORT).show();
-
-            double curLat = panoList.get(currentIndex).getLatitude();
-            double curLng = panoList.get(currentIndex).getLongitude();
-
-            float[] distNow = new float[1];
-            android.location.Location.distanceBetween(curLat, curLng, targetLat, targetLng, distNow);
-            float shortestDistance = distNow[0];
-            int bestNextIndex = currentIndex;
-
-            for (int i = 0; i < panoList.size(); i++) {
-                float[] distFromMe = new float[1];
-                android.location.Location.distanceBetween(
-                        curLat, curLng,
-                        panoList.get(i).getLatitude(), panoList.get(i).getLongitude(), distFromMe);
-
-                if (distFromMe[0] < 60 && distFromMe[0] > 1) {
-                    float[] distToTarget = new float[1];
-                    android.location.Location.distanceBetween(
-                            panoList.get(i).getLatitude(), panoList.get(i).getLongitude(),
-                            targetLat, targetLng, distToTarget);
-
-                    if (distToTarget[0] < shortestDistance) {
-                        shortestDistance = distToTarget[0];
-                        bestNextIndex = i;
-                    }
-                }
-            }
-
-            if (bestNextIndex > currentIndex) {
-                while (currentIndex != bestNextIndex) { nextButton(); }
-                setCenter();
-            } else if (bestNextIndex < currentIndex) {
-                while (currentIndex != bestNextIndex) { prevButton(); }
-                setCenter();
-            }
-        });
     }
+//    public void navigateSystem() {
+//        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+//            return;
+//        }
+//        String targetBox = getIntent().getStringExtra("clickedBoxName");
+//        List<Building> allBuildings = BuildingRepository.getBuildings();
+//        Building destinationBuilding = null;
+//        double disLat = 0;
+//        double disLng = 0;
+//        final double targetLat = disLat;
+//        final double targetLng = disLng;
+//
+//        for (Building b : allBuildings) {
+//            if (b.getName().equals(targetBox)) {
+//                destinationBuilding = b;
+//                disLat = b.getLatitude();
+//                disLng = b.getLongitude();
+//                break;
+//            }
+//        }
+//
+//        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+//            if (location != null) {
+//                double lat = 13.780329795615001;
+//                double lng = 100.5604076955666;
+//                calculateNear cn = new calculateNear(lat, lng);
+//                this.currentLocationValue = cn.getBuildingName();
+//                startIdx = 0;
+//                float minStartDist = Float.MAX_VALUE;
+//                for (int i = 0; i < panoList.size(); i++) {
+//                    float[] results = new float[1];
+//                    android.location.Location.distanceBetween(
+//                            lat, lng,
+//                            panoList.get(i).getLatitude(),
+//                            panoList.get(i).getLongitude(),
+//                            results);
+//
+//                    if (results[0] < minStartDist) {
+//                        minStartDist = results[0];
+//                        startIdx = i;
+//                    }
+//                }
+//                while (currentIndex != startIdx) { nextButton(); }
+//
+//            }
+//        });
+//
+//        findViewById(R.id.forwardArrow).setOnClickListener(v -> {
+//            Toast.makeText(this, "forward", Toast.LENGTH_SHORT).show();
+//
+//            double curLat = panoList.get(currentIndex).getLatitude();
+//            double curLng = panoList.get(currentIndex).getLongitude();
+//
+//            float[] distNow = new float[1];
+//            android.location.Location.distanceBetween(curLat, curLng, targetLat, targetLng, distNow);
+//            float shortestDistance = distNow[0];
+//            int bestNextIndex = currentIndex;
+//
+//            for (int i = 0; i < panoList.size(); i++) {
+//                float[] distFromMe = new float[1];
+//                android.location.Location.distanceBetween(
+//                        curLat, curLng,
+//                        panoList.get(i).getLatitude(), panoList.get(i).getLongitude(), distFromMe);
+//
+//                if (distFromMe[0] < 60 && distFromMe[0] > 1) {
+//                    float[] distToTarget = new float[1];
+//                    android.location.Location.distanceBetween(
+//                            panoList.get(i).getLatitude(), panoList.get(i).getLongitude(),
+//                            targetLat, targetLng, distToTarget);
+//
+//                    if (distToTarget[0] < shortestDistance) {
+//                        shortestDistance = distToTarget[0];
+//                        bestNextIndex = i;
+//                    }
+//                }
+//            }
+//
+//            if (bestNextIndex > currentIndex) {
+//                while (currentIndex != bestNextIndex) { nextButton(); }
+//                setCenter();
+//            } else if (bestNextIndex < currentIndex) {
+//                while (currentIndex != bestNextIndex) { prevButton(); }
+//                setCenter();
+//            }
+//        });
+//    }
     public void displayPixel(){
         final ImageView referenceImage = (ImageView) container.getChildAt(1);
         BitmapFactory.Options options = new BitmapFactory.Options();

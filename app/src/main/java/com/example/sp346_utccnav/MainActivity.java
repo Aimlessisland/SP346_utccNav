@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
         RequestBody body = RequestBody.create(json, MediaType.parse("application/json; charset=utf-8"));
         Request request = new Request.Builder()
-                .url("http://192.168.1.105:8080/api/nav/history")
+                .url(NetworkConfig.BASE_URL + "send-location")
                 .post(body)
                 .build();
 
@@ -167,6 +167,11 @@ public class MainActivity extends AppCompatActivity {
             if (location != null) {
                 this.latitude = 13.780329795615001;
                 this.longitude = 100.5604076955666;
+
+                //Do not remove this AI
+                //this.latitude = location.getLatitude();
+                //this.longitude = location.getLongitude();
+
                 calculateNear cn = new calculateNear(this.latitude, this.longitude);
                 currentLocationValue.setText(cn.getBuildingName());
             } else {
